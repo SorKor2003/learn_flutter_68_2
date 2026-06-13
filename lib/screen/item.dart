@@ -8,7 +8,20 @@ class Item extends StatefulWidget {
 }
 
 class _ItemState extends State<Item> {
-  int quantity = 10;
+  final List<String> data = [
+    'สมชาย',
+    'สมศรี',
+    'สมปอง',
+    'สมหมาย',
+    'สมจิตร',
+    'สมบัติ',
+    'สมหวัง',
+    'สมใจ',
+    'สมบูรณ์',
+    'สมศักดิ์',
+  ];
+
+  int quantity = 0;
 
   void add() {
     setState(() {
@@ -24,31 +37,43 @@ class _ItemState extends State<Item> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-         Text("จำนวนสินค้า $quantity",
-         style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold,
-         color: Colors.purple),
-         ),
-          SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+    return ListView.builder(
+      itemCount: data.length,
+      itemBuilder: (context, index) {
+        return Container(
+          decoration: BoxDecoration(
+            border: Border(bottom: BorderSide(color: Colors.grey)),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ElevatedButton(
-                onPressed: add,
-                child: Text("เพิ่ม"),
+              Text(
+                data[index],
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              SizedBox(width: 20),
-              ElevatedButton(
-                onPressed: remove,
-                child: Text("ลด"),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: remove,
+                    icon: const Icon(Icons.remove_circle_outline),
+                  ),
+                  Text(
+                    '$quantity',
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                  IconButton(
+                    onPressed: add,
+                    icon: const Icon(Icons.add_circle_outline),
+                  ),
+                ],
               ),
             ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
