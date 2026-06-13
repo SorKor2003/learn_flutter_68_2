@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:learn_flutter_68_2/screen/home.dart';
+
+import 'package:learn_flutter_68_2/screen/item.dart';
 void main() {
 
  // const app = MaterialApp(title: "หัวข้อ", home: Text("Hello World"));
@@ -16,7 +18,7 @@ runApp(
       backgroundColor: Colors.pinkAccent,
       centerTitle: true,
       ),
-      body: Home(),
+      body: Item(),
     ),
   ),
 );
