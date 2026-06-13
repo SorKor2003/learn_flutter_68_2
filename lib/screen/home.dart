@@ -5,17 +5,18 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        color: Colors.redAccent,
-        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        padding: EdgeInsets.all(50),
-        child: Text(
-          "Hello World 4",
-          style: TextStyle(fontSize: 30, color: Colors.white,
-          fontWeight: FontWeight.bold,
-          ),
+    return Scaffold(
+      body: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Image.asset(
+          'assets/images/grok-image-d0db6409-2873-41f5-a333-21041a0f556f.jpg',
+          width: 100,
+          height: 100,
+          fit: BoxFit.cover,
         ),
+      ],
       ),
     );
   }
