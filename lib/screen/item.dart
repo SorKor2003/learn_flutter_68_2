@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:learn_flutter_68_2/model/person.dart';
+
 class Item extends StatefulWidget {
   const Item({super.key});
 
@@ -8,30 +10,27 @@ class Item extends StatefulWidget {
 }
 
 class _ItemState extends State<Item> {
-  final List<String> data = [
-    'สมชาย',
-    'สมศรี',
-    'สมปอง',
-    'สมหมาย',
-    'สมจิตร',
-    'สมบัติ',
-    'สมหวัง',
-    'สมใจ',
-    'สมบูรณ์',
-    'สมศักดิ์',
-  ];
+  late final List<Person> data;
+  late final List<int> quantities;
 
-  int quantity = 0;
+  @override
+  void initState() {
+    super.initState();
+    data = people;
+    quantities = List<int>.filled(data.length, 0);
+  }
 
-  void add() {
+  void add(int index) {
     setState(() {
-      quantity++;
+      quantities[index]++;
     });
   }
 
-  void remove() {
+  void remove(int index) {
     setState(() {
-      quantity = quantity > 0 ? quantity - 1 : 0;
+      if (quantities[index] > 0) {
+        quantities[index]--;
+      }
     });
   }
 
@@ -40,9 +39,10 @@ class _ItemState extends State<Item> {
     return ListView.builder(
       itemCount: data.length,
       itemBuilder: (context, index) {
+        final person = data[index];
         return Container(
           decoration: BoxDecoration(
-            border: Border(bottom: BorderSide(color: Colors.grey)),
+            border: const Border(bottom: BorderSide(color: Colors.grey)),
             borderRadius: BorderRadius.circular(10),
           ),
           margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
@@ -50,26 +50,40 @@ class _ItemState extends State<Item> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                data[index],
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      person.name,
+                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 4),
+                    Text('${person.job}, อายุ ${person.age}'),
+                  ],
+                ),
               ),
               Row(
                 children: [
                   IconButton(
-                    onPressed: remove,
+                    onPressed: () => remove(index),
                     icon: const Icon(Icons.remove_circle_outline),
                   ),
                   Text(
-                    '$quantity',
+                    '${quantities[index]}',
                     style: const TextStyle(fontSize: 18),
                   ),
                   IconButton(
-                    onPressed: add,
+                    onPressed: () => add(index),
                     icon: const Icon(Icons.add_circle_outline),
                   ),
                 ],
               ),
+              Image.asset(
+                person.job.image,
+                width: 80,
+                height: 80,
+              ),      
             ],
           ),
         );
