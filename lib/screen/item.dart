@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:learn_flutter_68_2/model/person.dart';
 
+import 'package:google_fonts/google_fonts.dart';
 class Item extends StatefulWidget {
   const Item({super.key});
 
@@ -56,7 +57,7 @@ class _ItemState extends State<Item> {
                   children: [
                     Text(
                       person.name,
-                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 4),
                     Text('${person.job}, อายุ ${person.age}'),
