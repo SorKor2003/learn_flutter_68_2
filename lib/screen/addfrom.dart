@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:learn_flutter_68_2/model/person.dart';
 
+import 'package:learn_flutter_68_2/main.dart';
+
+import 'package:learn_flutter_68_2/screen/item.dart';
+
 class AddFrom extends StatefulWidget {
   const AddFrom({super.key});
 
@@ -80,6 +84,7 @@ class _AddFromState extends State<AddFrom> {
                 ),
                 DropdownButtonFormField<Job>(
                   decoration: InputDecoration(labelText: "Job"),
+                  initialValue: _job,
                   items: Job.values.map((job) {
                     return DropdownMenuItem(
                       value: job,
@@ -88,7 +93,7 @@ class _AddFromState extends State<AddFrom> {
                   }).toList(),
                   onChanged: (value) {
                     setState(() {
-                      _job = value!;
+                      _job = value;
                     });
                   },
                 ),
@@ -121,6 +126,8 @@ class _AddFromState extends State<AddFrom> {
                       setState(() {
                         people.add(Person(name: _name, age: _age, job: _job!));
                       });
+
+                      Navigator.pop(context);
                     }
                   },
                   style: FilledButton.styleFrom(
